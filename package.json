@@ -1,0 +1,14 @@
+{
+    "name": "djsf",
+    "version": "1.0.0",
+    "description": "",
+    "main": "main.js",
+    "scripts": {
+        "start": "node main.js"
+    },
+    "author": "Pandaaa",
+    "license": "ISC",
+    "dependencies": {
+        "discord.js": "^12.3.1"
+    }
+}
