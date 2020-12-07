@@ -8,7 +8,7 @@ class CreateCommand {
 
         this.enabled = true;
         this.type = 'command';
-        this.#exec = function(client, msg, args) {};
+        this.exec = function(client, msg, args) {};
         this.name = null;
         this.description = 'Makes something special 🌟';
         this.aliases = [];

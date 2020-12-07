@@ -8,6 +8,7 @@ try {
     require('socket.io');
     require('socket.io-client');
     require('ytdl-core');
+    require('@discordjs/opus');
 } catch (e) {
     console.log([
         `[${Logger.colors.red}ERROR${Logger.colors.white}]`,
@@ -28,7 +29,7 @@ const Log = new Logger();
 
 module.exports = {
     'Cluster': require('cluster'),
-    'Bot': require('./scripts/Manager'),
+    'Bot': require('./Manager'),
     'Logger': process.Logger = Log,
-    'Webserver': require('./scripts/Webserver'),
+    'Webserver': require('./Webserver'),
 };

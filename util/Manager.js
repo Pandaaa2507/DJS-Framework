@@ -1,6 +1,6 @@
 const DJSF = require('../DJSF');
 const Discord = require('discord.js');
-const Config = require('../../config.json');
+const Config = require('../config');
 
 const Manager = process.Manager = new Discord.ShardingManager(`${DJSF.Dirs.util}/Core.js`, {
     'mode': 'process',

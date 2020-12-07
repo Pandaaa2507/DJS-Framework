@@ -83,33 +83,4 @@ function CreateFunction() {
 
 };
 
-class CreateFunction {
-
-    constructor() {
-        this.enabled = true;
-        this.type = 'function';
-        this.#exec = function(client) {};
-        this.name = null;
-        this.repeat = null;
-    }
-
-    /**
-     * Set the function handler
-     * @param {FunctionHandler} handler 
-     */
-    setExec(handler) {
-
-    }
-
-    /**
-     * Disabled the function
-     */
-    disable() {
-
-    }
-
-}
-
-new CreateFunction()
-
 module.exports = CreateFunction;

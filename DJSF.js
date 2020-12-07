@@ -1,5 +1,7 @@
-const Log = require('./util/scripts/Logger');
+const Log = require('./util/Logger');
 const Logger = new Log();
+
+require('./util/functions/pad');
 
 const Files = require('./util/Files');
 
