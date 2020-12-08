@@ -67,7 +67,7 @@ function loadCommands() {
         let JSfiles = files.filter(f => !f.startsWith('_') && f.split('.').pop() === 'js' || fs.statSync(`${DJSF.Dirs.commands}${f}`).isDirectory() === true);
         for(let i = 0; i < JSfiles.length; i++) {
             let JSfile = JSfiles[i];
-            let props = require(`./core/commands/${JSfile}`)._cmd;
+            let props = require(`../core/commands/${JSfile}`)._cmd;
             if(props.enabled === true) {
                 client.commands[props.name] = props;
                 for(let i = 0; i < props.aliases.length; i++) {
