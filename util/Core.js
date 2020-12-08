@@ -123,8 +123,8 @@ client.setInterval(() => client.sweepMessages(900), 1000 * 60);
 let cooldowns = {};
 client.on('message', (msg) => {
 
-    let serverFile = DJSF.Files.guild(msg.guild.id);
-    let prefix = DJSF.Bot.prefix || serverFile.prefix;
+    let serverFile = DJSF.Files.getGuild(msg.guild.id);
+    let prefix = serverFile.prefix;
 
     if(!msg.content.startsWith(prefix) && msg.author.bot || msg.channel.type === 'dm') {
         return;
