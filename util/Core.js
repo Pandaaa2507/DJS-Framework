@@ -67,7 +67,7 @@ function loadCommands() {
         let JSfiles = files.filter(f => !f.startsWith('_') && f.split('.').pop() === 'js' || fs.statSync(`${DJSF.Dirs.commands}${f}`).isDirectory() === true);
         for(let i = 0; i < JSfiles.length; i++) {
             let JSfile = JSfiles[i];
-            let props = require(`./commands/${JSfile}`)._cmd;
+            let props = require(`./core/commands/${JSfile}`)._cmd;
             if(props.enabled === true) {
                 client.commands[props.name] = props;
                 for(let i = 0; i < props.aliases.length; i++) {
@@ -88,7 +88,7 @@ function loadFunctions() {
         let JSfiles = files.filter(f => f.split('.').pop() === 'js' && !f.startsWith('_'));
         for(let i = 0; i < JSfiles.length; i++) {
             let JSfile = JSfiles[i];
-            let props = require(`./functions/${JSfile}`)._func;
+            let props = require(`../core/functions/${JSfile}`)._func;
             client.functions[props.name] = props;
         }
         return login();
