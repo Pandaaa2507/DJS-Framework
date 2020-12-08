@@ -1,5 +1,5 @@
 const DJSF = require('../DJSF');
-require('./Pad');
+require('./functions/pad');
 
 const Discord = require('discord.js');
 const fs = require('fs');
