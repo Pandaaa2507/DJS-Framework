@@ -7,6 +7,13 @@ module.exports = {};
 let dg = `${Dirs.data}/default_guild.json`;
 let du = `${Dirs.data}/default_user.json`;
 
+if(!fs.existsSync(Dirs.guilds)) {
+    fs.mkdirSync(Dirs.guilds);
+}
+if(!fs.existsSync(Dirs.users)) {
+    fs.mkdirSync(Dirs.users);
+}
+
 module.exports.getGuild = function(guildID) {
     let p = `${Dirs.guilds}/${guildID}/guild.json`;
     if(!fs.existsSync(p)) {
