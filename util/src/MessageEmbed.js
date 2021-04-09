@@ -1,7 +1,9 @@
+'use strict';
+
 const Discord = require('discord.js');
 
 /**
- * 
+ * Create a cool looking message
  * @param {String} description 
  * @param {String} emoji
  */

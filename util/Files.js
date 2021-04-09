@@ -1,79 +1,54 @@
 const Dirs = require('./Dirs');
-const path = require('path');
 const fs = require('fs');
 
 module.exports = {};
 
-let dg = `${Dirs.data}/default_guild.json`;
-let du = `${Dirs.data}/default_user.json`;
-
-if(!fs.existsSync(Dirs.guilds)) {
-    fs.mkdirSync(Dirs.guilds);
-}
-if(!fs.existsSync(Dirs.users)) {
-    fs.mkdirSync(Dirs.users);
-}
-
-module.exports.getGuild = function(guildID) {
-    let p = `${Dirs.guilds}/${guildID}/guild.json`;
+/**
+ * Get storage from a guild
+ * @param {String} guildID The guild's id
+ * @param {String} storageName The storage name to use (default: guild)
+ * @returns {Object} Saved storage data
+ */
+module.exports.getGuildStorage = function(guildID, storageName) {
+    let p = `${Dirs.guilds}/${guildID}/${storageName || 'guild'}.json`;
     if(!fs.existsSync(p)) {
-        let pb = path.dirname(path.join(p));
-        if(!fs.existsSync(pb)) {
-            fs.mkdirSync(pb);
-        }
-        let f = fs.readFileSync(dg, 'utf8');
-        fs.appendFileSync(p, f);
+        fs.appendFileSync(p, '{}');
     }
     return JSON.parse(fs.readFileSync(p, 'utf8'));
 };
-module.exports.updateGuild = function(guildID, guildData) {
-    let p = `${Dirs.guilds}/${guildID}/guild.json`;
-    return fs.writeFileSync(p, JSON.stringify(guildData, null, 4));
-};
-module.exports.createGuildBackup = function(guildID, guildData) {
-    let p = `${Dirs.users}/${guildID}/backup.json`;
-    if(!fs.existsSync(p)) {
-        let pb = path.dirname(path.join(p));
-        if(!fs.existsSync(pb)) {
-            fs.mkdirSync(pb);
-        }
-        fs.appendFileSync(p, '');
-    }
-    return fs.writeFileSync(p, JSON.stringify(guildData, null, 4));
-};
-module.exports.loadGuildBackup = function(guildID) {
-    let p = `${Dirs.users}/${guildID}/backup.json`;
-    return fs.readdirSync(p, 'utf8');
+
+/**
+ * Update storage for a guild
+ * @param {String} guildID The guild's id
+ * @param {Object} storageData The storage data so save
+ * @param {String} storageName The storage name to use (default: guild)
+ */
+module.exports.updateGuildStorage = function(guildID, storageData, storageName) {
+    let p = `${Dirs.guilds}/${guildID}/${storageName || 'guild'}.json`;
+    return fs.writeFileSync(p, JSON.stringify(storageData, null, 4));
 };
 
-module.exports.getUser = function(userID) {
-    let p = `${Dirs.users}/${userID}/user.json`;
+/**
+ * Get storage from a user
+ * @param {String} userID The user's id
+ * @param {String} storageName The storage name to use (default: user)
+ * @returns {Object} Saved storage data
+ */
+module.exports.getUserStorage = function(userID, storageName) {
+    let p = `${Dirs.users}/${userID}/${storageName || 'user'}.json`;
     if(!fs.existsSync(p)) {
-        let pb = path.dirname(path.join(p));
-        if(!fs.existsSync(pb)) {
-            fs.mkdirSync(pb);
-        }
-        let f = fs.readFileSync(du, 'utf8');
-        fs.appendFileSync(p, f);
+        fs.appendFileSync(p, '{}');
     }
     return JSON.parse(fs.readFileSync(p, 'utf8'));
 };
-module.exports.updateUser = function(userID, userData) {
-    let p = `${Dirs.users}/${userID}/user.json`;
-    return fs.writeFileSync(p, JSON.stringify(userData, null, 4));
-};
-module.exports.createUserBackup = function(userID, userData) {
-    let p = `${Dirs.users}/${userID}/backup.json`;
-    if(!fs.existsSync(p)) {
-        let pb = path.dirname(path.join(p));
-        if(!fs.existsSync(pb)) {
-            fs.mkdirSync(pb);
-        }
-        fs.appendFileSync(p, '');
-    }
-    return fs.writeFileSync(p, JSON.stringify(userData, null, 4));
-};
-module.exports.loadUserBackup = function(userID) {
-    let p = `${Dirs.users}/${userID}/backup.json`;
-    return fs.readdirSync(p, 'utf8');
+
+/**
+ * Update storage for a user
+ * @param {String} userID The user's id
+ * @param {Object} storageData The storage data so save
+ * @param {String} storageName The storage name to use (default: user)
+ */
+module.exports.updateUserStorage = function(userID, storageData, storageName) {
+    let p = `${Dirs.users}/${userID}/${storageName || 'user'}.json`;
+    return fs.writeFileSync(p, JSON.stringify(storageData, null, 4));
 };

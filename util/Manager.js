@@ -1,8 +1,9 @@
 const DJSF = require('../DJSF');
 const Discord = require('discord.js');
 const Config = require('../config');
+const Events = require('events');
 
-const Manager = process.Manager = new Discord.ShardingManager(`${DJSF.Dirs.util}/Core.js`, {
+const Manager = process.Manager = new Discord.ShardingManager(`${DJSF.Dirs.main}/core/index.js`, {
     'mode': 'process',
     'respawn': true,
     'totalShards': 'auto',
@@ -10,32 +11,41 @@ const Manager = process.Manager = new Discord.ShardingManager(`${DJSF.Dirs.util}
     'token': Config.bot.token,
 });
 
-let data = {
-    events: {}
-};
+const Handler = new Events.EventEmitter();
 
-module.exports = function() {
+class DJSF_Manager {
+
+    constructor() {
+        
+    }
 
     /**
-     * @param {number|string} shardCount
+     * Start the Discord bot
+     * @param {number} shards The shard count to spawn
+     * @returns {void}
     */
-    this.start = async function(shardCount) {
-        Manager.spawn(shardCount || 'auto', 2500)
-        .then(shard => {
-            if(typeof data.events.start === 'function') {
-                data.events.start(data.shard = shard);
-            }
-        })
+    start(shards) {
+        Manager.spawn(shards || 'auto', 2500)
+        .then(shards => Handler.emit('start', shards))
         .catch(error => process.Logger.Error(`Invalid token provided!`));
-    };
+    }
 
     /**
-     * @param {Discord.Shard} shard 
-    */
-    function callback(shard) {}
-    /**
-     * @param {callback} callback 
-    */
-    this.onStart = (callback) => data.events.start = callback;
+     * 
+     * @param {CallableFunction} callback 
+     * @returns 
+     */
+    onStart(callback) {
+        Handler.addListener('start', callback);
+    }
 
-};
+    /**
+     * @param {CallableFunction} callback 
+    */
+    onShard(callback) {
+        Manager.on('shardCreate', callback);
+    }
+
+}
+
+module.exports = DJSF_Manager;

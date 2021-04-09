@@ -1,68 +1,73 @@
-const Discord = require('discord.js');
+'use strict';
 
-/**
- * Defines a new SubCommand
-*/
-module.exports = function() {
+const CommandHandler = require('../structures/CommandHandler');
 
-    let BaseStructure = {
-        'enabled': true,
-        'type': 'subcommand',
-        'exec': function(util, client, msg, args) {
-            return;
-        },
-        'options': {
-            'permissionLevel': 0,
-            'cooldown': 2
-        }
-    };
+class CreateCommand {
+
+    constructor() {
+
+        this.enabled = true;
+        this.type = 'subcommand';
+        this.exec = function(client, msg, args) {};
+        this.name = null;
+        this.description = 'Makes something special 🌟';
+        this.aliases = [];
+
+    }
 
     /**
-     * @param {Object} util
-     * @param {Discord.Client} client 
-     * @param {Discord.Message} msg 
-     * @param {Array} args 
-    */
-    function cmdHandler(util, client, msg, args) {};
-    
-    /**
-     * @param {cmdHandler} SubCommandHandeler Sets the SubCommand Handler
-    */
-    this.setExec = function(SubCommandHandeler) {
-        BaseStructure.exec = SubCommandHandeler;
-    };
+     * Set the command handler
+     * @param {CommandHandler} handler 
+     */
+    setExec(handler) {
+        this.exec = handler;
+        return this;
+    }
 
     /**
-     * @param {Number} CooldownCuration Sets the Cooldown duration of the SubCommand
-    */
-    this.setCooldown = function(CooldownCuration) {
-        BaseStructure.options.cooldown = CooldownCuration;
-    };
+     * Set the name of the command
+     * @param {String} name 
+     */
+    setName(name) {
+        this.name = name;
+        return this;
+    }
 
     /**
-     * @param {Number} PermissionLevel Sets the Permission Level of the SubCommand
-    */
-    this.setPermissionLevel = function(PermissionLevel) {
-        BaseStructure.options.permissionLevel = PermissionLevel;
-    };
+     * Set the description of the command
+     * @param {String>} description 
+     */
+    setDescription(description) {
+        this.description = description;
+        return this;
+    }
 
     /**
-     * Disables the SubCommand
-    */
-    this.disable = function() {
-        BaseStructure.enabled = false;
-    };
+     * Add an alias for the command
+     * @param {String} alias 
+     */
+    addAlias(alias) {
+        this.aliases.push(alias);
+        return this;
+    }
 
     /**
-     * @param {Object} util
-     * @param {Discord.Client} client 
-     * @param {Discord.Message} msg 
-     * @param {Array} args 
-    */
-    this.exec = function(util, client, msg, args) {
-        return BaseStructure.exec(util, client, msg, args);
-    };
+     * Set all aliases for the command
+     * @param {Array<String>} aliaslist 
+     */
+    setAliases(aliaslist) {
+        this.aliases = aliaslist;
+        return this;
+    }
 
-    this._scmd = BaseStructure;
+    /**
+     * Disables the subcommand
+     */
+    disable() {
+        this.enabled = false;
+        return this;
+    }
 
-};
+}
+
+module.exports = CreateCommand;

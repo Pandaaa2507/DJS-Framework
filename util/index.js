@@ -5,8 +5,6 @@ try {
     require('discord.js');
     require('request');
     require('express');
-    require('socket.io');
-    require('socket.io-client');
     require('ytdl-core');
     require('@discordjs/opus');
 } catch (e) {
@@ -25,11 +23,10 @@ try {
     process.exit(0);
 }
 
-const Log = new Logger();
+const Log = process.Logger = new Logger();
 
 module.exports = {
     'Cluster': require('cluster'),
     'Bot': require('./Manager'),
-    'Logger': process.Logger = Log,
-    'Webserver': require('./Webserver'),
+    'Logger': Log,
 };

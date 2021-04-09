@@ -14,6 +14,7 @@ class CreateCommand {
         this.aliases = [];
         this.permissionLevel = 0;
         this.cooldown = 2;
+        this.subcommands = {};
 
     }
 
@@ -23,6 +24,15 @@ class CreateCommand {
      */
     setExec(handler) {
         this.exec = handler;
+        return this;
+    }
+
+    /**
+     * Add a subcommand
+     * @param {CreateCommand} subcommand 
+     */
+    addSubcommand(subcommand) {
+        this.subcommands[subcommand.name] = subcommand;
         return this;
     }
 
