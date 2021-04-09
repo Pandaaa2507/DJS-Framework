@@ -1,0 +1,15 @@
+{
+    "name": "djsf",
+    "version": "1.0.0",
+    "description": "",
+    "main": "main.js",
+    "scripts": {
+        "start": "node main.js",
+        "modules": "npm install discord.js @discordjs/opus ytdl-core request express socket.io socket.io-client zlib-sync discord/erlpack libsodium-wrappers bufferutil utf-8-validate"
+    },
+    "author": "Pandaaa",
+    "license": "ISC",
+    "dependencies": {
+        "discord.js": "^12.3.1"
+    }
+}
